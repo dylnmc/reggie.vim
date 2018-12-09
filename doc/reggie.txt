@@ -1,0 +1,107 @@
+*reggie.txt*  Automatic registers for yank and paste
+
+
+INTRODUCTION                                    *reggie*
+
+A set of tools to automatically use a set register are afforded to make life
+easier if a register needs to be used heavily.
+
+
+COMMANDS                                        *reggie-commands*
+
+These commands set either the yank or the paste register register for that are
+used in the maps below.
+
+                                                *reggie-:SetReg*
+:SetReg [reg]           Set both reggie's yank and paste registers to [reg]
+
+                                                *reggie-:SetPasteReg*
+:SetPasteReg [reg]      Set reggie's paste register to [reg]
+
+                                                *reggie-:SetYankReg*
+:SetYankReg [reg]       Set reggie's yank register to [reg]
+
+                                                *reggie-:NoReg*
+:NoReg                  Unset both reggie's yank and paste registers
+
+                                                *reggie-:NoPasteReg*
+:NoPasteReg             Unset reggie's paste register
+
+                                                *reggie-:NoYankReg*
+:NoYankReg              Unset reggie's yank register
+
+:RegPrompt              After prompted for input, set both reggie's registers to
+                        the inputted character
+
+
+MAPPINGS                                        *reggie-mappings*
+
+You should use the below <plug> mappings and map them to your desired keys.
+Example mappings can be found at |reggie-default-mappings|. Each of the below
+mappings exists for normal mode (nmap) and visual mode (xmap).
+
+                                                *reggie-<plug>(reggiePasteAfter)*
+<plug>(reggiePasteAfter)
+                        This uses reggie's paste register to paste text after
+                        the cursor with |p|.
+
+                                                *reggie-<plug>(reggiePasteBefore)*
+<plug>(reggiePasteBefore)
+                        This uses reggie's paste register to paste text before
+                        the cursor with |P|.
+
+                                                *reggie-<plug>(reggieYank)*
+<plug>(reggieYank)      This uses reggie's yank register to yank text with |y|.
+
+                                                *reggie-default-mappings*
+The mappings that follow are the default mappings that use |<LocalLeader>| to
+map the above <plug> maps. You can use |:nmap| and |:xmap| to map any of them to
+whatever you like, but be careful mapping |y|, |Y|, |p|, and |P|.
+>
+    nmap <localleader>p <plug>(reggiePasteAfter)
+    xmap <localleader>p <plug>(reggiePasteAfter)
+    nmap <localleader>P <plug>(reggiePasteBefore)
+    xmap <localleader>P <plug>(reggiePasteBefore)
+    nmap <localleader>y <plug>(reggieYank)
+    xmap <localleader>y <plug>(reggieYank)
+    nmap <localleader>" <plug>(reggiePrompt)
+<
+
+FUNCTIONS                                       *fugitive-functions*
+
+                                                *reggie#setPaste()*
+reggie#setPaste([reg])  Expects [reg] as the on and only parameter, and it will
+                        set reggie's paste register
+
+                                                *reggie#setYank()*
+reggie#setYank([reg])   Expects [reg] as the on and only parameter, and it will
+                        set reggie's yank register
+
+                                                *reggie#getPaste()*
+reggie#getPaste()       Returns one character: reggie's paste register. You can
+                        use this in your statusline. For example, you can use
+                        `set statusline+=@%{reggie#getPaste()}` to always show
+                        what register reggie is using for paste.
+
+                                                *reggie#getYank()*
+reggie#getYank()        Returns one character: reggie's yank register. As above,
+                        you can add this to your statusline to show what
+                        register reggie is using for paste.
+
+                                                *reggie#prompt()*
+reggie#prompt()         Prompts for one character and then sets both reggie's
+                        paste and yank registers to this inputted character.
+
+
+TODO                                            *reggie-todo*
+
+This plugin is still in the preliminary stages of development and has not been
+thoroughly tested. If you notice an issue, please submit a new issue! If you,
+please try your hand at fixing the issue via a pull request.
+
+A known pitfall is that this plugin only allows for pasting and yanking;
+however, things like |c| and |d| do not work with this plugin. As such this is
+the todo!
+
+ vim:tw=78:et:ft=help:norl:
+
