@@ -13,7 +13,7 @@ function! reggie#setPaste(reggie)
 		echohl NONE
 		return
 	endif
-	let g:pasteReg = a:reggie
+	let s:pasteReggie = a:reggie
 endfunction
 
 function! reggie#setYank(reggie)
@@ -23,7 +23,7 @@ function! reggie#setYank(reggie)
 		echohl NONE
 		return
 	endif
-	let g:yankReggie = a:reggie
+	let s:yankReggie = a:reggie
 endfunction
 
 function! reggie#getPaste()

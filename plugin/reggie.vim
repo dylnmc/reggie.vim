@@ -23,9 +23,9 @@ nnoremap <plug>(reggiePrompt) :call reggie#prompt()<cr>
 command! -bar -nargs=1 SetReg      call reggie#setPaste(<q-args>) <bar> call reggie#setYank(<q-args>)
 command! -bar -nargs=1 SetPasteReg call reggie#setPaste(<q-args>)
 command! -bar -nargs=1 SetYankReg  call reggie#setYank(<q-args>)
-command! -bar -nargs=0 NoReg       call reggie#set('"') <bar> call reggie#set('"')
-command! -bar -nargs=0 NoPasteReg  call reggie#set('"')
-command! -bar -nargs=0 NoYankReg   call reggie#set('"')
+command! -bar -nargs=0 NoReg       call reggie#setPaste('"') <bar> call reggie#setYank('"')
+command! -bar -nargs=0 NoPasteReg  call reggie#setPaste('"')
+command! -bar -nargs=0 NoYankReg   call reggie#setYank('"')
 command! -bar -nargs=0 RegPrompt   call reggie#prompt()
 
 " DEFAULTS:
@@ -35,10 +35,10 @@ if ! hasmapto("\<plug>(reggiePasteAfter)", 'n')
 	silent! nmap <unique> <localleader>p <plug>(reggiePasteAfter)
 endif
 if ! hasmapto("\<plug>(reggiePasteBefore)", 'v')
-	silent! nmap <unique> <localleader>P <plug>(reggiePasteBefore)
+	silent! xmap <unique> <localleader>p <plug>(reggiePasteAfter)
 endif
 if ! hasmapto("\<plug>(reggiePasteBefore)", 'n')
-	silent! xmap <unique> <localleader>p <plug>(reggiePasteAfter)
+	silent! nmap <unique> <localleader>P <plug>(reggiePasteBefore)
 endif
 if ! hasmapto("\<plug>(reggiePasteBefore)", 'v')
 	silent! xmap <unique> <localleader>P <plug>(reggiePasteBefore)
